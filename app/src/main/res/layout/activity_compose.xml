@@ -13,6 +13,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/etTweet"
         android:text="Compose"
+        android:onClick="onCompose"
         tools:layout_editor_absoluteX="147dp"
         tools:layout_editor_absoluteY="146dp" />
 

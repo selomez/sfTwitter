@@ -15,6 +15,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -61,12 +62,19 @@ public class TimelineActivity extends AppCompatActivity {
         startActivityForResult(i, COMPOSE_REQ); // brings up the second activity
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Tweet tweet = Parcels.unwrap(getIntent().getParcelableExtra("tweet"));
+        tweets.add(0, tweet);
+        tweetAdapter.notifyItemInserted(0);
+        rvTweets.scrollToPosition(0);
+    }
+
 
     private void populateTimeline(){
         client.getHomeTimeline(new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-             //   Log.d("TwitterClient", response.toString());
 
                 for (int i = 0 ; i < response.length(); i++){
 
@@ -79,10 +87,8 @@ public class TimelineActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-
-
-
             }
+
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

@@ -2,8 +2,11 @@ package com.codepath.apps.restclienttemplate.models;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
-public class User {
+
+@Parcel
+public class User  {
 
     // attributes
 
@@ -12,7 +15,7 @@ public class User {
     public String screenName;
     public String profileImageUrl;
 
-
+public User(){}
     public static User fromJSON(JSONObject object) throws JSONException{
         User user = new User();
 
