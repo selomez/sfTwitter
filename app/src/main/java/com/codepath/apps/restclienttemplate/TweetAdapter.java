@@ -43,7 +43,6 @@ public class TweetAdapter extends RecyclerView.Adapter <TweetAdapter.ViewHolder>
 
         Tweet tweet = mTweets.get(position);
 
- //  //     String time - getre
 
         holder.tvUsername.setText(tweet.user.name);
         holder.tvDate.setText(getRelativeTimeAgo(tweet.createdAt));
@@ -55,6 +54,18 @@ public class TweetAdapter extends RecyclerView.Adapter <TweetAdapter.ViewHolder>
                 .into(holder.ivProfileImage);
 
     }
+
+    public void clear() {
+        mTweets.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(List<Tweet> list) {
+        mTweets.addAll(list);
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public int getItemCount() {

@@ -6,7 +6,7 @@ import org.parceler.Parcel;
 
 
 @Parcel
-public class User  {
+public class User {
 
     // attributes
 
@@ -15,8 +15,10 @@ public class User  {
     public String screenName;
     public String profileImageUrl;
 
-public User(){}
-    public static User fromJSON(JSONObject object) throws JSONException{
+    public User() {
+    }
+
+    public static User fromJSON(JSONObject object) throws JSONException {
         User user = new User();
 
         user.name = object.getString("name");

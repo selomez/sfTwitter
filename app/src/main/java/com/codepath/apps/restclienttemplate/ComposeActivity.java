@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -25,9 +26,7 @@ public class ComposeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_compose);
         // getting the text
         simpleEditText = (EditText) findViewById(R.id.etTweet);
-        String strValue = simpleEditText.getText().toString();
         client =  TwitterApp.getRestClient(this);
-        //   client.sendTweet(strValue, handler);
     }
 
 
@@ -40,12 +39,19 @@ public class ComposeActivity extends AppCompatActivity {
                 try{
                     Tweet tweet = Tweet.fromJSON(response);
                     Intent data = new Intent();
-                    data.putExtra("tweet", Parcels.wrap(tweet));
+                    data.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
                     setResult(RESULT_OK,data);
                     finish();
                 }catch(Exception e ){
                     e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "failed 1",Toast.LENGTH_LONG ).show();
+
                 }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Toast.makeText(getApplicationContext(), "failed",Toast.LENGTH_LONG ).show();
             }
         });
 
