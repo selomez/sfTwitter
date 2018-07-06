@@ -28,6 +28,9 @@ public class TimelineActivity extends AppCompatActivity {
     TweetAdapter tweetAdapter;
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
+    // Instance of the progress action-view
+    MenuItem miActionProgressItem;
+
 
     private SwipeRefreshLayout swipeContainer;
 
@@ -49,20 +52,16 @@ public class TimelineActivity extends AppCompatActivity {
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
         // Setup refresh listener which triggers new data loading
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                                                @Override
-                                                public void onRefresh() {
-                                                    // Your code to refresh the list here.
-                                                    // Make sure you call swipeContainer.setRefreshing(false)
-                                                    // once the network request has completed successfully.
-                                                    fetchTimelineAsync(0);
-                                                }
-                                            });
-
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                fetchTimelineAsync(0);
+                }
+            });
             populateTimeline();
-
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
