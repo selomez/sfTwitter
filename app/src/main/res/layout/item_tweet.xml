@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="5dp"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+    android:background="#ffffff"
+    android:layout_width="match_parent" android:layout_height="wrap_content"  android:layout_margin="0.5dp">
 
     <ImageView
         android:id="@+id/ivProfile"
@@ -20,7 +20,11 @@
         android:layout_marginLeft="5dp"
         android:layout_toEndOf="@+id/ivProfile"
         android:layout_alignStart="@+id/tvBody"
-        android:text="TextView" />
+        android:background="#ffffff"
+        android:text="TextView"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:textColor="#000000"/>
 
     <TextView
         android:id="@+id/tvBody"
@@ -29,8 +33,9 @@
         android:layout_below="@+id/tvUsername"
         android:layout_marginLeft="5dp"
         android:layout_toEndOf="@+id/ivProfile"
-
-        android:text="TextView" />
+        android:background="#ffffff"
+        android:text="TextView"
+        android:textColor="#000000"/>
 
     <TextView
         android:id="@+id/tvDate"
@@ -38,5 +43,28 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
+        android:background="#ffffff"
         android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/ivLike"
+        android:layout_width="15dp"
+        android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="150dp"
+        android:layout_below="@+id/tvBody"
+        android:background="#ffffff"
+        app:srcCompat="@drawable/like" />
+    <ImageView
+        android:id="@+id/ivRetweet"
+        android:layout_width="15dp"
+        android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/tvBody"
+        android:layout_toRightOf="@+id/ivLike"
+        android:layout_marginLeft="50dp"
+        android:background="#ffffff"
+        android:layout_marginEnd="156dp"
+        app:srcCompat="@drawable/retweet" />
+
 </RelativeLayout>
