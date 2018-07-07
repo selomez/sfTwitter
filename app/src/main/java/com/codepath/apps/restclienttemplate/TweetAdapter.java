@@ -7,6 +7,7 @@ import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -50,8 +51,19 @@ public class TweetAdapter extends RecyclerView.Adapter <TweetAdapter.ViewHolder>
         holder.tvUsername.setText(tweet.user.name);
         holder.tvDate.setText(getRelativeTimeAgo(tweet.createdAt));
         holder.tvBody.setText(tweet.body);
+        final String username = tweet.user.screenName;
 
+        ImageButton reply = holder.ivReply;
 
+        reply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (context, ReplyActivity.class);
+                intent.putExtra("username" , Parcels.wrap(username));
+                context.startActivity(intent);
+
+            }
+        });
 
         Glide.with(context)
                 .load(tweet.user.profileImageUrl)
@@ -76,6 +88,7 @@ public class TweetAdapter extends RecyclerView.Adapter <TweetAdapter.ViewHolder>
         public TextView tvUsername;
         public TextView tvBody;
         public TextView tvDate;
+        public ImageButton ivReply;
 
 
         public ViewHolder (View itemView){
@@ -85,6 +98,7 @@ public class TweetAdapter extends RecyclerView.Adapter <TweetAdapter.ViewHolder>
             tvUsername = (TextView ) itemView.findViewById(R.id.tvUsername);
             tvBody = (TextView)itemView.findViewById(R.id.tvBody);
             tvDate = (TextView)itemView.findViewById(R.id.tvDate);
+            ivReply = (ImageButton) itemView.findViewById(R.id.ivReply);
 
             itemView.setOnClickListener(this);
 

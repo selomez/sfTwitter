@@ -26,7 +26,7 @@ public class ComposeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_compose);
         // getting the text
         simpleEditText = (EditText) findViewById(R.id.etTweet);
-        client =  TwitterApp.getRestClient(this);
+        client = TwitterApp.getRestClient(this);
     }
 
 
@@ -36,29 +36,26 @@ public class ComposeActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try{
+                try {
                     Tweet tweet = Tweet.fromJSON(response);
                     Intent data = new Intent();
                     data.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
-                    setResult(RESULT_OK,data);
+                    setResult(RESULT_OK, data);
                     finish();
-                }catch(Exception e ){
+                } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "failed 1",Toast.LENGTH_LONG ).show();
+                    Toast.makeText(getApplicationContext(), "failed 1", Toast.LENGTH_LONG).show();
 
                 }
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Toast.makeText(getApplicationContext(), "failed",Toast.LENGTH_LONG ).show();
+                Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_LONG).show();
             }
         });
 
     }
-
-
-    public void finish(View view) {
-        finish();
-    }
 }
+
+
