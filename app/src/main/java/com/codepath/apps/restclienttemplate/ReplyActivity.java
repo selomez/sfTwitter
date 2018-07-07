@@ -34,6 +34,7 @@ public class ReplyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reply);
         simpleEditText = (EditText) findViewById(R.id.etTweet);
         client =  TwitterApp.getRestClient(this);
+        message = findViewById(R.id.editTweet);
 
         ImageButton button = (ImageButton) findViewById(R.id.button);
 
@@ -44,49 +45,27 @@ public class ReplyActivity extends AppCompatActivity {
         username = "@" + Parcels.unwrap(getIntent().getParcelableExtra("username"));
         message.setText(username);
 
-        handler = new JsonHttpResponseHandler() {
+
+    };
+
+    public void onReply(View v){
+        client.replyTweet(simpleEditText.getText().toString(), new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try{
-                    tweet = new Tweet();
                     Tweet tweet = Tweet.fromJSON(response);
-                    Intent intent = new Intent(ReplyActivity.this, TimelineActivity.class);
-                    intent.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
-                    startActivity(intent);
+                    Intent data = new Intent();
+                    data.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
+                    setResult(RESULT_OK,data);
+                    finish();
                 }catch(Exception e ){
                     e.printStackTrace();
-
+                    Toast.makeText(getApplicationContext(), "reply failed",Toast.LENGTH_LONG ).show();
                 }
             }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-            }
-        };
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                client.replyTweet(simpleEditText.getText().toString(), new JsonHttpResponseHandler() {
-
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        try{
-                            Tweet tweet = Tweet.fromJSON(response);
-                            Intent data = new Intent();
-                            data.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
-                            setResult(RESULT_OK,data);
-                            finish();
-                        }catch(Exception e ){
-                            e.printStackTrace();
-                            Toast.makeText(getApplicationContext(), "reply failed",Toast.LENGTH_LONG ).show();
-
-                        }
-                    }
-                });
-         }
         });
     }
 }

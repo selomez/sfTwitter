@@ -71,13 +71,15 @@
 
     <ImageButton
         android:id="@+id/ivReply"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="120dp"
+        android:layout_width="17dp"
+        android:layout_height="18dp"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/tvBody"
-        android:onClick="reply"
+        android:layout_marginStart="76dp"
+        android:adjustViewBounds="true"
         android:background="#ffffff"
+        android:onClick="reply"
+        android:scaleType="fitXY"
         app:srcCompat="@drawable/reply" />
 
 </RelativeLayout>

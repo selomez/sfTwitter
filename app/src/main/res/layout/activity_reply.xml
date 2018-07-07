@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ComposeActivity">
+    tools:context=".ReplyActivity">
 
     <ImageButton
         android:id="@+id/button"
@@ -29,7 +29,7 @@
         app:counterMaxLength="280">
 
         <EditText
-            android:id="@+id/etTweet"
+            android:id="@+id/editTweet"
             android:layout_width="match_parent"
             android:layout_height="136dp"
             android:layout_alignParentStart="true"
@@ -40,6 +40,21 @@
             android:maxLength="140"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="16dp" />
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:onClick="onReply"
+            android:text="Tweet"
+            android:bottomRightRadius="60dp"
+            android:bottomLeftRadius="60dp"
+            android:topLeftRadius="60dp"
+            android:topRightRadius="60dp"
+            android:background="#cad5e7"
+            tools:layout_editor_absoluteX="147dp"
+            tools:layout_editor_absoluteY="146dp" />
     </android.support.design.widget.TextInputLayout>
 
 </RelativeLayout>
